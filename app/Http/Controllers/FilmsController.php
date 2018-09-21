@@ -19,6 +19,7 @@ class FilmsController extends Controller
     }
 
     public function showAllFilms() {
+        //test comment
 //        $request = Request::create('/api/all-films', 'GET');
 //
 //        $response = Route::dispatch($request);
