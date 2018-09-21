@@ -8,4 +8,9 @@ class Film extends Model
 {
     //
     protected $table = 'films';
+
+    public function comments(){
+
+        return $this->hasMany('App\Comment');
+    }
 }

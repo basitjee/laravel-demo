@@ -35,6 +35,11 @@
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ url('/films/create') }}"
+                                  ">
+                                    {{ __('Create Film') }}
+                                </a>
+
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                    onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -72,14 +77,28 @@
                     </div>
                 </div>
             <br>
+            @if ($errors->any())
+                <ul class="alert alert-danger">
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            @endif
+            @if (Session::has('comment_success'))
+                <div class="alert alert-success">
+                    <ul>
+                        <li>{!! Session::get('comment_success') !!}</li>
+                    </ul>
+                </div>
+            @endif
                 @if (Auth::check())
             <h4>Add A Comment</h4>
-            <form method="post" action="new_comment">
+            <form method="post" action="{{ route('film-comment') }}">
                 {{csrf_field()}}
                 <input type="number" name="film_id" hidden value="{{$film->id}}">
                 <div class="form-group">
                     <label>Name</label>
-                    <input type="text" name="name" class="form-control" placeholder="" required>
+                    <input type="text" name="name" value="{{ Auth::user()->name }}"class="form-control" placeholder="" required>
                 </div>
                 <div class="form-group">
                     <label >Comment</label>

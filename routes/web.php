@@ -22,7 +22,7 @@ Route::get('/films/create', function () {
 });
 
 
-Route::get('/films/{slug}', 'FilmsController@showFilm');
+Route::get('/films/{slug}', 'FilmsController@showFilm')->name('film-slug');
 
 Route::get('/register', function () {
     return view('newuser');
@@ -32,7 +32,7 @@ Route::post('registeruser', 'UsersController@validateForm');
 
 Route::post('newfilm', 'FilmsController@newFilm');
 
-Route::post('new_comment', 'FilmsController@newComment');
+Route::post('new_comment', 'FilmsController@newComment')->name('film-comment');
 
 Auth::routes();
 

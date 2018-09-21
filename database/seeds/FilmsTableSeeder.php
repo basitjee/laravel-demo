@@ -14,17 +14,24 @@ class FilmsTableSeeder extends Seeder
         //
         $faker = \Faker\Factory::create();
 
-        for($i=0;$i<100;$i++) {
-            DB::table('films')->insert([
+        for($i=1;$i<3;$i++) {
+            $film = DB::table('films')->insert([
+                        'name' => str_random(10),
+                        'description' => $faker->paragraph,
+                        'release_date' => $faker->date(),
+                        'rating' => $faker->numberBetween(0, 5),
+                        'ticket_price' => $faker->numberBetween(100, 500),
+                        'country' => $faker->country,
+                        'genre' => str_random(10),
+                        'photo' => '1'
+                    ]);
+
+            DB::table('comments')->insert([
                 'name' => str_random(10),
-                'description' => $faker->paragraph,
-                'release_date' => $faker->date(),
-                'rating' => $faker->numberBetween(0, 5),
-                'ticket_price' => $faker->numberBetween(100, 500),
-                'country' => $faker->country,
-                'genre' => str_random(10),
-                'photo' => '1'
+                'comment' => $faker->paragraph,
+                'film_id' => $film->id
             ]);
+
         }
     }
 }

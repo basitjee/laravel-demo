@@ -41,6 +41,12 @@
                                     {{ __('Logout') }}
                                 </a>
 
+                                <a class="dropdown-item" href="{{ route('logout') }}"
+                                   onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                    {{ __('Logout') }}
+                                </a>
+
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                     @csrf
                                 </form>
@@ -81,7 +87,7 @@
                 <div class="card" style="width: 46.5rem;">
                     <img class="card-img-top" src="http://127.0.0.1:8000/images/download.jpg" width="100px" height="300px" alt="Card image cap">
                     <div class="card-body">
-                        <h2 class="card-title">{{$film['name']}}</h2>
+                        <h2 class="card-title"> <a href="{{route('film-slug', [ 'slug' => $film['slug'] ]) }}"> {{$film['name']}}</a> </h2>
                         <h4>Description</h4>
                         <p class="card-text">{{$film['description']}}</p>
                         <h4>Release Date</h4>
