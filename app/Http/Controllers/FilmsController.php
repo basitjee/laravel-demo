@@ -80,17 +80,11 @@ class FilmsController extends Controller
                 'photo' => $getimageName
             ]);
 
-            Comment::insert([
-                'name' => $request->input('name'),
-                'film_id' => $request->input('film_id'),
-                'comment' => $request->input('comment')
-            ]);
-
             return redirect('films')->with('film_success', 'New film added successfully');
         }
 
     }
-    
+
     public function newComment(Request $request) {
 
         $validator = Validator::make($request->all(), [
@@ -109,7 +103,9 @@ class FilmsController extends Controller
                 'comment' => $request->input('comment')
             ]);
 
-            return back()->with('comment_success', 'New comment added successfully');
+            $film = Film::find($request->film_id);
+
+            return redirect()->route('film-slug', ['slug' => $film->slug ])->with('comment_success', 'New comment added successfully');
         }
 
     }
